@@ -46,6 +46,7 @@ static CGFloat const kPanelControllerFloatLeeway = 0.01f;
 }
 
 - (void)addInternalScrollViewPanGesture {
+    [self removeInternalScrollViewPanGestureRecognizer];
     [self.internalScrollView.panGestureRecognizer addTarget:self action:@selector(handleScrollViewGestureRecognizer:)];
 }
 
