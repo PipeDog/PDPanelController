@@ -10,6 +10,7 @@
 
 @interface DemoPanelController () <UITableViewDelegate, UITableViewDataSource>
 
+@property (nonatomic, strong) UIView *grabberHandleView;
 @property (nonatomic, strong) UITableView *tableView;
 
 @end
@@ -31,26 +32,31 @@
     self.view.clipsToBounds = YES;
     self.view.layer.maskedCorners = kCALayerMinXMinYCorner | kCALayerMaxXMinYCorner;
     
-    _portraitWidth = [UIScreen mainScreen].bounds.size.width;
+    self.portraitWidth = [UIScreen mainScreen].bounds.size.width;
 }
 
 - (void)createViewHierarchy {
+    [self.view addSubview:self.grabberHandleView];
     [self.view addSubview:self.tableView];
 }
 
 - (void)layoutContentViews {
+    self.grabberHandleView.translatesAutoresizingMaskIntoConstraints = NO;
     self.tableView.translatesAutoresizingMaskIntoConstraints = NO;
     
-    NSLayoutConstraint *topConstraint = [self.tableView.topAnchor constraintEqualToAnchor:self.view.topAnchor];
-    NSLayoutConstraint *leftConstraint = [self.tableView.leftAnchor constraintEqualToAnchor:self.view.leftAnchor];
-    NSLayoutConstraint *bottomConstraint = [self.tableView.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor];
-    NSLayoutConstraint *rightConstraint = [self.tableView.rightAnchor constraintEqualToAnchor:self.view.rightAnchor];
+    [NSLayoutConstraint activateConstraints:@[
+        [self.grabberHandleView.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor],
+        [self.grabberHandleView.topAnchor constraintEqualToAnchor:self.view.topAnchor constant:10.f],
+        [self.grabberHandleView.widthAnchor constraintEqualToConstant:36.f],
+        [self.grabberHandleView.heightAnchor constraintEqualToConstant:5.f],
+    ]];
     
-    NSArray *constraints = @[
-        topConstraint, leftConstraint, bottomConstraint, rightConstraint,
-    ];
-    
-    [NSLayoutConstraint activateConstraints:constraints];
+    [NSLayoutConstraint activateConstraints:@[
+        [self.tableView.topAnchor constraintEqualToAnchor:self.grabberHandleView.bottomAnchor constant:10.f],
+        [self.tableView.leftAnchor constraintEqualToAnchor:self.view.leftAnchor],
+        [self.tableView.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor],
+        [self.tableView.rightAnchor constraintEqualToAnchor:self.view.rightAnchor],
+    ]];
 }
 
 #pragma mark - Override Methods
@@ -59,19 +65,19 @@
 }
 
 - (void)willMoveToPoint:(CGFloat)point {
-    NSLog(@"%s, point = %lf", __FUNCTION__, point);
+    // NSLog(@"%s, point = %lf", __FUNCTION__, point);
 }
 
 - (void)didMoveToPoint:(CGFloat)point {
-    NSLog(@"%s, point = %lf", __FUNCTION__, point);
+    // NSLog(@"%s, point = %lf", __FUNCTION__, point);
 }
 
 - (void)didDragToPoint:(CGFloat)point {
-    NSLog(@"%s, point = %lf", __FUNCTION__, point);
+    // NSLog(@"%s, point = %lf", __FUNCTION__, point);
 }
 
 - (CGFloat)bounceOffset {
-    return 0.f;
+    return 20.f;
 }
 
 - (CGSize)preferredSize {
@@ -97,6 +103,16 @@
 }
 
 #pragma mark - Getter Methods
+- (UIView *)grabberHandleView {
+    if (!_grabberHandleView) {
+        _grabberHandleView = [[UIView alloc] init];
+        _grabberHandleView.layer.masksToBounds = YES;
+        _grabberHandleView.layer.cornerRadius = 2.5f;
+        _grabberHandleView.backgroundColor = [UIColor colorWithDisplayP3Red:0.76f green:0.77f blue:0.76f alpha:1.f];
+    }
+    return _grabberHandleView;
+}
+
 - (UITableView *)tableView {
     if (!_tableView) {
         _tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
