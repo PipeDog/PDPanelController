@@ -12,14 +12,15 @@
 @implementation UIViewController (PDPanelController)
 
 - (void)pd_addPanelController:(PDPanelController *)panelController
-     initialStickyPointOffset:(CGFloat)initialStickyPointOffset
+          initialGlueLocation:(CGFloat)initialGlueLocation
                      animated:(BOOL)animated {
     NSAssert(![self isKindOfClass:[UITableViewController class]], @"It's not possible to attach a PullUpController to a UITableViewController.");
+    
     [self addChildViewController:panelController];
-    [panelController setupWithSuperview:self.view initialStickyPointOffset:initialStickyPointOffset];
+    [panelController setupWithSuperview:self.view initialGlueLocation:initialGlueLocation];
 
     if (animated) {
-        [panelController animate:PDPanelControllerActionAdd duration:0.3f animations:^{
+        [panelController animateWithAction:PDPanelControllerActionAdd duration:0.3f animations:^{
             [self.view layoutIfNeeded];
         } completion:nil];
     } else {
@@ -31,7 +32,7 @@
     [panelController hide];
     
     if (animated) {
-        [panelController animate:PDPanelControllerActionRemove duration:0.3f animations:^{
+        [panelController animateWithAction:PDPanelControllerActionRemove duration:0.3f animations:^{
             [self.view layoutIfNeeded];
         } completion:^(BOOL finished) {
             [panelController willMoveToParentViewController:nil];

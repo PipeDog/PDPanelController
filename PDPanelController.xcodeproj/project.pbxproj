@@ -20,7 +20,7 @@
 		DD4F734D23E2B6A900A06AFF /* UIViewController+PDPanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = DD4F734C23E2B6A900A06AFF /* UIViewController+PDPanelController.m */; };
 		DD4F735023E2B6B500A06AFF /* UIScrollView+PDPanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = DD4F734F23E2B6B500A06AFF /* UIScrollView+PDPanelController.m */; };
 		DD4F735323E2B6CF00A06AFF /* NSArray+PDAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = DD4F735223E2B6CF00A06AFF /* NSArray+PDAdd.m */; };
-		DD4F735623E2F48B00A06AFF /* DemoPanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = DD4F735523E2F48B00A06AFF /* DemoPanelController.m */; };
+		DD4F735923E5D1AB00A06AFF /* PDContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DD4F735823E5D1AB00A06AFF /* PDContentViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,8 +68,8 @@
 		DD4F734F23E2B6B500A06AFF /* UIScrollView+PDPanelController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+PDPanelController.m"; sourceTree = "<group>"; };
 		DD4F735123E2B6CF00A06AFF /* NSArray+PDAdd.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSArray+PDAdd.h"; sourceTree = "<group>"; };
 		DD4F735223E2B6CF00A06AFF /* NSArray+PDAdd.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSArray+PDAdd.m"; sourceTree = "<group>"; };
-		DD4F735423E2F48B00A06AFF /* DemoPanelController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DemoPanelController.h; sourceTree = "<group>"; };
-		DD4F735523E2F48B00A06AFF /* DemoPanelController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DemoPanelController.m; sourceTree = "<group>"; };
+		DD4F735723E5D1AB00A06AFF /* PDContentViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PDContentViewController.h; sourceTree = "<group>"; };
+		DD4F735823E5D1AB00A06AFF /* PDContentViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PDContentViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,8 +125,8 @@
 				DD4F731223E2B64E00A06AFF /* AppDelegate.m */,
 				DD4F731423E2B64E00A06AFF /* SceneDelegate.h */,
 				DD4F731523E2B64E00A06AFF /* SceneDelegate.m */,
-				DD4F735423E2F48B00A06AFF /* DemoPanelController.h */,
-				DD4F735523E2F48B00A06AFF /* DemoPanelController.m */,
+				DD4F735723E5D1AB00A06AFF /* PDContentViewController.h */,
+				DD4F735823E5D1AB00A06AFF /* PDContentViewController.m */,
 				DD4F731723E2B64E00A06AFF /* ViewController.h */,
 				DD4F731823E2B64E00A06AFF /* ViewController.m */,
 				DD4F731A23E2B64F00A06AFF /* Main.storyboard */,
@@ -306,7 +306,7 @@
 				DD4F734923E2B66D00A06AFF /* PDPanelController.m in Sources */,
 				DD4F735323E2B6CF00A06AFF /* NSArray+PDAdd.m in Sources */,
 				DD4F731923E2B64E00A06AFF /* ViewController.m in Sources */,
-				DD4F735623E2F48B00A06AFF /* DemoPanelController.m in Sources */,
+				DD4F735923E5D1AB00A06AFF /* PDContentViewController.m in Sources */,
 				DD4F731323E2B64E00A06AFF /* AppDelegate.m in Sources */,
 				DD4F734D23E2B6A900A06AFF /* UIViewController+PDPanelController.m in Sources */,
 				DD4F732423E2B65200A06AFF /* main.m in Sources */,

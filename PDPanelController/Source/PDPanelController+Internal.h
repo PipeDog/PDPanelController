@@ -14,10 +14,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, weak) UIScrollView *internalScrollView;
 
-- (void)setupWithSuperview:(UIView *)superview initialStickyPointOffset:(CGFloat)initialStickyPointOffset;
+- (void)setupWithSuperview:(UIView *)superview initialGlueLocation:(CGFloat)initialGlueLocation;
 - (void)addInternalScrollViewPanGesture;
 - (void)removeInternalScrollViewPanGestureRecognizer;
 - (void)hide;
+- (void)animateWithAction:(PDPanelControllerAction)action
+                 duration:(NSTimeInterval)duration
+               animations:(void (^)(void))animations
+               completion:(void (^ __nullable)(BOOL finished))completion;
 
 @end
 

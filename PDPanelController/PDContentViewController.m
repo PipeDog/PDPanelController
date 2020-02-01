@@ -1,21 +1,22 @@
 //
-//  DemoPanelController.m
+//  PDContentViewController.m
 //  PDPanelController
 //
-//  Created by liang on 2020/1/30.
+//  Created by liang on 2020/2/1.
 //  Copyright © 2020 liang. All rights reserved.
 //
 
-#import "DemoPanelController.h"
+#import "PDContentViewController.h"
+#import "PDPanelController.h"
 
-@interface DemoPanelController () <UITableViewDelegate, UITableViewDataSource>
+@interface PDContentViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) UIView *grabberHandleView;
 @property (nonatomic, strong) UITableView *tableView;
 
 @end
 
-@implementation DemoPanelController
+@implementation PDContentViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -23,7 +24,6 @@
     [self commitInit];
     [self createViewHierarchy];
     [self layoutContentViews];
-    [self.tableView pd_attach:self];
 }
 
 - (void)commitInit {
@@ -31,8 +31,6 @@
     self.view.layer.cornerRadius = 15.f;
     self.view.clipsToBounds = YES;
     self.view.layer.maskedCorners = kCALayerMinXMinYCorner | kCALayerMaxXMinYCorner;
-    
-    self.portraitWidth = [UIScreen mainScreen].bounds.size.width;
 }
 
 - (void)createViewHierarchy {
@@ -57,31 +55,6 @@
         [self.tableView.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor],
         [self.tableView.rightAnchor constraintEqualToAnchor:self.view.rightAnchor],
     ]];
-}
-
-#pragma mark - Override Methods
-- (NSArray<NSNumber *> *)middleStickyPoints {
-    return @[@(260.f)];
-}
-
-- (void)willMoveToPoint:(CGFloat)point {
-    // NSLog(@"%s, point = %lf", __FUNCTION__, point);
-}
-
-- (void)didMoveToPoint:(CGFloat)point {
-    // NSLog(@"%s, point = %lf", __FUNCTION__, point);
-}
-
-- (void)didDragToPoint:(CGFloat)point {
-    // NSLog(@"%s, point = %lf", __FUNCTION__, point);
-}
-
-- (CGFloat)bounceOffset {
-    return 20.f;
-}
-
-- (CGSize)preferredSize {
-    return CGSizeMake(self.portraitWidth, 500.f);
 }
 
 #pragma mark - UITableViewDelegate
@@ -118,8 +91,14 @@
         _tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
         _tableView.delegate = self;
         _tableView.dataSource = self;
+        // NOTE: 尽量减少快速滑动时触发的 panelController 与 tableView 同时上滑问题
+        _tableView.decelerationRate = UIScrollViewDecelerationRateFast;
     }
     return _tableView;
+}
+
+- (UIScrollView *)scrollView {
+    return self.tableView;
 }
 
 @end
