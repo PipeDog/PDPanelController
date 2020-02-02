@@ -163,7 +163,7 @@ static CGFloat const kPanelControllerFloatLeeway = 0.01f;
     /**
      The user should be able to drag the view up through the internal scroll view when
      - the scroll direction is up (`!isScrollingDown`)
-     - the PullUpController's view is fully opened. (`topConstraint.constant <= parentViewHeight - lastGlueLocation`)
+     - the panelController's view is fully opened. (`topConstraint.constant <= parentViewHeight - lastGlueLocation`)
      */
     BOOL shouldDragViewUp = !isScrollingDown && !isFullOpened;
     BOOL shouldDragView = shouldDragViewDown || shouldDragViewUp;
@@ -212,7 +212,7 @@ static CGFloat const kPanelControllerFloatLeeway = 0.01f;
 }
 
 #pragma mark - Setup Methods
-- (void)setupPanGestureRecognizer {    
+- (void)setupPanGestureRecognizer {
     _panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanGestureRecognizer:)];
     _panGestureRecognizer.minimumNumberOfTouches = 1;
     _panGestureRecognizer.maximumNumberOfTouches = 1;
