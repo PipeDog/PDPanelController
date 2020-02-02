@@ -495,10 +495,10 @@ static CGFloat const kPanelControllerFloatLeeway = 0.01f;
 }
 
 - (NSInteger)currentGlueLocationIndex {
-    CGFloat glueLocationTreshold = self.parentViewController.view.frame.size.height - self.topConstraint.constant;
+    CGFloat glueLocationThreshold = self.parentViewController.view.frame.size.height - self.topConstraint.constant;
     
     NSArray<NSNumber *> *diffs = [[self allGlueLocations] map:^id _Nonnull(NSNumber * _Nonnull obj, NSUInteger idx) {
-        return @(ABS([obj doubleValue] - glueLocationTreshold));
+        return @(ABS([obj doubleValue] - glueLocationThreshold));
     }];
 
     CGFloat minDiff = 0.f;
