@@ -112,7 +112,6 @@ static CGFloat const kPanelControllerFloatLeeway = 0.01f;
 }
 
 - (void)addInternalScrollViewPanGesture {
-    [self removeInternalScrollViewPanGestureRecognizer];
     [self.internalScrollView.panGestureRecognizer addTarget:self action:@selector(handleScrollViewGestureRecognizer:)];
 }
 
@@ -213,9 +212,7 @@ static CGFloat const kPanelControllerFloatLeeway = 0.01f;
 }
 
 #pragma mark - Setup Methods
-- (void)setupPanGestureRecognizer {
-    [self addInternalScrollViewPanGesture];
-    
+- (void)setupPanGestureRecognizer {    
     _panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanGestureRecognizer:)];
     _panGestureRecognizer.minimumNumberOfTouches = 1;
     _panGestureRecognizer.maximumNumberOfTouches = 1;
