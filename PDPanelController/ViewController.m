@@ -33,17 +33,26 @@
     [self.widthSlider addTarget:self action:@selector(widthSliderValueChanged:) forControlEvents:UIControlEventValueChanged];
     [self.view addSubview:self.widthSlider];
     
-    PDContentViewController *contentViewController = [[PDContentViewController alloc] init];
     
-    self.panelController = [[PDPanelController alloc] initWithContentViewController:contentViewController];
+    self.panelController = [[PDPanelController alloc] init];
     self.panelController.delegate = self;
     self.panelController.layoutDelegate = self;
     self.panelController.animationDelegate = self;
-    
     [self pd_addPanelController:self.panelController initialGlueLocation:50.f animated:YES];
     
-    // You should attch scrollView after addPanelController.
-    [contentViewController.scrollView pd_attach:self.panelController];
+    PDContentViewController *contentViewController = [[PDContentViewController alloc] init];
+    self.panelController.contentViewController = contentViewController;
+}
+
+- (IBAction)showContentViewController:(id)sender {
+    PDContentViewController *contentViewController = [[PDContentViewController alloc] init];
+    self.panelController.contentViewController = contentViewController;
+}
+
+- (IBAction)showEmptyViewController:(id)sender {
+    UIViewController<PDPanelContentViewControllerDelegate> *contentViewController = (UIViewController<PDPanelContentViewControllerDelegate> *)[[UIViewController alloc] init];
+    contentViewController.view.backgroundColor = [UIColor redColor];
+    self.panelController.contentViewController = contentViewController;
 }
 
 - (void)widthSliderValueChanged:(UISlider *)slider {

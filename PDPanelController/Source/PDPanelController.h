@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class PDPanelController;
 
+@protocol PDPanelContentViewControllerDelegate;
 @protocol PDPanelControllerDelegate, PDPanelControllerLayoutDelegate, PDPanelControllerAnimationDelegate;
 
 typedef NS_ENUM(NSUInteger, PDPanelControllerAction) {
@@ -25,15 +26,14 @@ typedef NS_ENUM(NSUInteger, PDPanelControllerAction) {
 
 @interface PDPanelController : UIViewController
 
+@property (nonatomic, strong, nullable) UIViewController<PDPanelContentViewControllerDelegate> *contentViewController;
+
 @property (nonatomic, weak, nullable) id<PDPanelControllerDelegate> delegate;
 @property (nonatomic, weak, nullable) id<PDPanelControllerLayoutDelegate> layoutDelegate;
 @property (nonatomic, weak, nullable) id<PDPanelControllerAnimationDelegate> animationDelegate;
 
 @property (nonatomic, readonly) CGFloat currentLocation;
 @property (nonatomic, readonly) NSArray<NSNumber *> *allGlueLocations;
-@property (nonatomic, readonly) UIViewController *contentViewController;
-
-- (instancetype)initWithContentViewController:(UIViewController *)contentViewController NS_DESIGNATED_INITIALIZER;
 
 - (void)moveToVisibleLocation:(CGFloat)location
                   animated:(BOOL)animated
@@ -41,6 +41,19 @@ typedef NS_ENUM(NSUInteger, PDPanelControllerAction) {
 
 - (void)updatePreferredFrameIfNeeded:(BOOL)animated;
 - (void)updatePreferredFrameIfNeeded:(BOOL)animated withLocation:(CGFloat)location;
+
+@end
+
+@protocol PDPanelContentViewControllerDelegate <NSObject>
+
+@optional
+- (void)willAddToPanelController:(PDPanelController *)panelController;
+// Attach scrollView here if needed.
+- (void)didAddToPanelController:(PDPanelController *)panelController;
+
+// Detach scrollView in the following methods if needed.
+- (void)willRemoveFromPanelController:(PDPanelController *)panelController;
+- (void)didRemoveFromPanelController:(PDPanelController *)panelController;
 
 @end
 

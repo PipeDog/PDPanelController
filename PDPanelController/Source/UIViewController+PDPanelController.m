@@ -13,9 +13,7 @@
 
 - (void)pd_addPanelController:(PDPanelController *)panelController
           initialGlueLocation:(CGFloat)initialGlueLocation
-                     animated:(BOOL)animated {
-    NSAssert(![self isKindOfClass:[UITableViewController class]], @"It's not possible to attach a PullUpController to a UITableViewController.");
-    
+                     animated:(BOOL)animated {    
     [self addChildViewController:panelController];
     [panelController setupWithSuperview:self.view initialGlueLocation:initialGlueLocation];
 

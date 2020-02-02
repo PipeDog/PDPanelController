@@ -15,13 +15,13 @@ NS_ASSUME_NONNULL_BEGIN
 @interface UIScrollView (PDPanelController)
 
 /**
- Attach the scroll view to the provided pull up controller in order to move it with the scroll view content.
+ Attach the scroll view to the provided panel controller in order to move it with the scroll view content.
  @param panelController the panel controller to move with the current scroll view content.
  */
 - (void)pd_attach:(PDPanelController *)panelController;
 
 /**
- Remove the scroll view from the pull up controller so it no longer moves with the scroll view content.
+ Remove the scroll view from the panel controller so it no longer moves with the scroll view content.
  @param panelController the panel controller to be removed from controlling the scroll view.
  */
 - (void)pd_detach:(PDPanelController *)panelController;

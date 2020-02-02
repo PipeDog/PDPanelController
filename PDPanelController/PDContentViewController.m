@@ -75,6 +75,23 @@
     return cell;
 }
 
+#pragma mark - PDPanelContentViewControllerDelegate
+- (void)willAddToPanelController:(PDPanelController *)panelController {
+    
+}
+
+- (void)didAddToPanelController:(PDPanelController *)panelController {
+    [self.tableView pd_attach:panelController];
+}
+
+- (void)willRemoveFromPanelController:(PDPanelController *)panelController {
+    [self.tableView pd_detach:panelController];
+}
+
+- (void)didRemoveFromPanelController:(PDPanelController *)panelController {
+    // [self.tableView pd_detach:panelController];
+}
+
 #pragma mark - Getter Methods
 - (UIView *)grabberHandleView {
     if (!_grabberHandleView) {
@@ -95,10 +112,6 @@
         _tableView.decelerationRate = UIScrollViewDecelerationRateFast;
     }
     return _tableView;
-}
-
-- (UIScrollView *)scrollView {
-    return self.tableView;
 }
 
 @end

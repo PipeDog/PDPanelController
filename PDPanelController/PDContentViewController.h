@@ -7,12 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PDPanelController.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface PDContentViewController : UIViewController
-
-@property (nonatomic, readonly) UIScrollView *scrollView;
+@interface PDContentViewController : UIViewController <PDPanelContentViewControllerDelegate>
 
 @end
 

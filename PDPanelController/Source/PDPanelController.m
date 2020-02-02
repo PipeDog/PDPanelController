@@ -9,6 +9,7 @@
 #import "PDPanelController.h"
 #import "PDPanelController+Internal.h"
 #import "NSArray+PDAdd.h"
+#import <objc/message.h>
 
 static CGFloat const kPanelControllerFloatLeeway = 0.01f;
 
@@ -49,52 +50,10 @@ static CGFloat const kPanelControllerFloatLeeway = 0.01f;
 
 @implementation PDPanelController
 
-- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-    UIViewController *controller;
-    return [self initWithContentViewController:controller];
-}
-
-- (instancetype)initWithCoder:(NSCoder *)coder {
-    UIViewController *controller;
-    return [self initWithContentViewController:controller];
-}
-
-- (instancetype)initWithContentViewController:(UIViewController *)contentViewController {
-    NSAssert(contentViewController, @"The argument `contentViewController` can not be nil!");
-    self = [super initWithNibName:nil bundle:nil];
-    if (self) {
-        _contentViewController = contentViewController;
-    }
-    return self;
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self commitInit];
-    [self createViewHierarchy];
-    [self layoutContentViews];
-}
-
-- (void)commitInit {
     self.view.translatesAutoresizingMaskIntoConstraints = NO;
-    self.contentViewController.view.translatesAutoresizingMaskIntoConstraints = NO;
-
-    [self addChildViewController:self.contentViewController];
-}
-
-- (void)createViewHierarchy {
-    [self.view addSubview:self.contentViewController.view];
-}
-
-- (void)layoutContentViews {
-    UIViewController *controller = self.contentViewController;
-    [NSLayoutConstraint activateConstraints:@[
-        [controller.view.topAnchor constraintEqualToAnchor:self.view.topAnchor],
-        [controller.view.leftAnchor constraintEqualToAnchor:self.view.leftAnchor],
-        [controller.view.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor],
-        [controller.view.rightAnchor constraintEqualToAnchor:self.view.rightAnchor],
-    ]];
 }
 
 #pragma mark - Internal Methods
@@ -449,6 +408,37 @@ static CGFloat const kPanelControllerFloatLeeway = 0.01f;
 }
 
 #pragma mark - Setter Methods
+- (void)setContentViewController:(UIViewController<PDPanelContentViewControllerDelegate> *)contentViewController {
+    void (^notifyBlock)(SEL) = ^(SEL sel) {
+        if ([self->_contentViewController respondsToSelector:sel]) {
+            ((void (*)(id, SEL, id))(void *) objc_msgSend)((id)self->_contentViewController, sel, self);
+        }
+    };
+    
+    notifyBlock(@selector(willRemoveFromPanelController:));
+    [_contentViewController removeFromParentViewController];
+    [_contentViewController.view removeFromSuperview];
+    notifyBlock(@selector(didRemoveFromPanelController:));
+    
+    _contentViewController = contentViewController;
+    if (!_contentViewController) { return; }
+    
+    notifyBlock(@selector(willAddToPanelController:));
+    [self addChildViewController:_contentViewController];
+    [self.view addSubview:_contentViewController.view];
+    
+    UIView *view = self.contentViewController.view;
+    view.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    [NSLayoutConstraint activateConstraints:@[
+        [view.topAnchor constraintEqualToAnchor:self.view.topAnchor],
+        [view.leftAnchor constraintEqualToAnchor:self.view.leftAnchor],
+        [view.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor],
+        [view.rightAnchor constraintEqualToAnchor:self.view.rightAnchor],
+    ]];
+    notifyBlock(@selector(didAddToPanelController:));
+}
+
 - (void)setDelegate:(id<PDPanelControllerDelegate>)delegate {
     _delegate = delegate;
 
