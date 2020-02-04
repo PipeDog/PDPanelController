@@ -42,6 +42,9 @@ typedef NS_ENUM(NSUInteger, PDPanelControllerAction) {
 - (void)updatePreferredFrameIfNeeded:(BOOL)animated;
 - (void)updatePreferredFrameIfNeeded:(BOOL)animated withLocation:(CGFloat)location;
 
+- (void)enableDrag;
+- (void)disableDrag;
+
 @end
 
 @protocol PDPanelContentViewControllerDelegate <NSObject>

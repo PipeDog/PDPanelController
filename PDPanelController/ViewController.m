@@ -26,7 +26,7 @@
     self.view.backgroundColor = [UIColor lightGrayColor];
     self.panelWidth = [UIScreen mainScreen].bounds.size.width;
 
-    self.widthSlider = [[UISlider alloc] initWithFrame:CGRectMake(50, 100, 150, 40)];
+    self.widthSlider = [[UISlider alloc] initWithFrame:CGRectMake(50, 200, 150, 40)];
     self.widthSlider.minimumValue = 0.7f;
     self.widthSlider.maximumValue = 1.f;
     self.widthSlider.value = self.widthSlider.maximumValue;
@@ -42,6 +42,14 @@
     
     PDContentViewController *contentViewController = [[PDContentViewController alloc] init];
     self.panelController.contentViewController = contentViewController;
+}
+
+- (IBAction)enableDrag:(id)sender {
+    [self.panelController enableDrag];
+}
+
+- (IBAction)disableDrag:(id)sender {
+    [self.panelController disableDrag];
 }
 
 - (IBAction)showContentViewController:(id)sender {

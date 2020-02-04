@@ -39,11 +39,39 @@
                                     <action selector="showEmptyViewController:" destination="BYZ-38-t0r" eventType="touchUpInside" id="jGf-qb-9g4"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="veE-0v-u8X">
+                                <rect key="frame" x="65" y="106" width="82" height="30"/>
+                                <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="82" id="XVY-dC-VaP"/>
+                                    <constraint firstAttribute="height" constant="30" id="wAZ-Eo-VQq"/>
+                                </constraints>
+                                <state key="normal" title="Enable drag"/>
+                                <connections>
+                                    <action selector="enableDrag:" destination="BYZ-38-t0r" eventType="touchUpInside" id="yip-6a-IMI"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YLs-cp-Mdc">
+                                <rect key="frame" x="262" y="106" width="87" height="30"/>
+                                <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="2Tl-ci-qD0"/>
+                                    <constraint firstAttribute="width" constant="87" id="smp-Hm-3jx"/>
+                                </constraints>
+                                <state key="normal" title="Disabld drag"/>
+                                <connections>
+                                    <action selector="disableDrag:" destination="BYZ-38-t0r" eventType="touchUpInside" id="sCa-la-FCh"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="pdY-XS-C01" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="130" id="151-AR-XzD"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="YLs-cp-Mdc" secondAttribute="trailing" constant="65" id="FF1-T1-kiY"/>
+                            <constraint firstItem="YLs-cp-Mdc" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="62" id="HWe-nm-IYw"/>
                             <constraint firstItem="Z8c-8m-c8C" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="69" id="Pbu-BU-DG2"/>
+                            <constraint firstItem="veE-0v-u8X" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="65" id="ZBC-H4-NE9"/>
+                            <constraint firstItem="veE-0v-u8X" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="62" id="iew-N3-MD3"/>
                             <constraint firstItem="Z8c-8m-c8C" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="129" id="s2n-iS-Fhm"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="pdY-XS-C01" secondAttribute="trailing" constant="66" id="wUG-Od-9mx"/>
                         </constraints>

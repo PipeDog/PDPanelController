@@ -338,6 +338,17 @@ static CGFloat const kPanelControllerFloatLeeway = 0.01f;
     } completion:nil];
 }
 
+- (void)enableDrag {
+    [self removeInternalScrollViewPanGestureRecognizer];
+    [self addInternalScrollViewPanGesture];
+    self.panGestureRecognizer.enabled = YES;
+}
+
+- (void)disableDrag {
+    [self removeInternalScrollViewPanGestureRecognizer];
+    self.panGestureRecognizer.enabled = NO;
+}
+
 #pragma mark - Override Methods
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
     if (_animationDelegateHas.viewWillTransitionToSize) {
